@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { plan } = JSON.parse(event.body);
+    const { plan, quantity } = JSON.parse(event.body);
 
     if (!PRICE_IDS[plan]) {
       return {
@@ -23,12 +23,17 @@ exports.handler = async (event) => {
       };
     }
 
+    // Number of children — default to 1, clamp to a sane range
+    let qty = parseInt(quantity, 10);
+    if (!Number.isInteger(qty) || qty < 1) qty = 1;
+    if (qty > 10) qty = 10;
+
     const siteUrl = process.env.URL || 'http://localhost:8888';
 
     // Build the request body as URL-encoded form data (what Stripe's API expects)
     const params = new URLSearchParams();
     params.append('line_items[0][price]', PRICE_IDS[plan]);
-    params.append('line_items[0][quantity]', '1');
+    params.append('line_items[0][quantity]', String(qty));
     params.append('success_url', `${siteUrl}/success.html`);
     params.append('cancel_url', `${siteUrl}/cancel.html`);
 
