@@ -3,9 +3,9 @@
 // so this works with plain Netlify drag-and-drop deploys.
 
 const PRICE_IDS = {
-  full: 'price_1UBIHbJV3cpnuuS3INgy1Bc7',      // Pay in full: $1,250 (one-time)
-  monthly: 'price_1UBIHbJV3cpnuuS3mIQ5DCyI',   // Monthly: $138.89 x 9 payments
-  quarterly: 'price_1UBIHbJV3cpnuuS3iutoAPC1', // Quarterly: $416.67 x 3 payments
+  full: 'price_1UBIb4JV3cpnuuS3ZoexygPL',      // Pay in full: $1,250 (one-time) [LIVE]
+  monthly: 'price_1UBIbeJV3cpnuuS30uXTV804',   // Monthly: $138.89 x 9 payments [LIVE]
+  quarterly: 'price_1UBIbyJV3cpnuuS3RjGmK8ym', // Quarterly: $416.67 x 3 payments [LIVE]
 };
 
 exports.handler = async (event) => {
