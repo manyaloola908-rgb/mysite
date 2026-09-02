@@ -3,9 +3,9 @@
 // so this works with plain Netlify drag-and-drop deploys.
 
 const PRICE_IDS = {
-  full: 'price_1UAuWhJV3cpnuuS3lzrZ1xjz',      // Pay in full (one-time)
-  monthly: 'price_1UAuWhJV3cpnuuS3psgc3BhS',   // Monthly, billed over 9 months
-  quarterly: 'price_1UAuWhJV3cpnuuS31tKnWToi', // Quarterly, billed over 9 months
+  full: 'price_1UBIHbJV3cpnuuS3INgy1Bc7',      // Pay in full: $1,250 (one-time)
+  monthly: 'price_1UBIHbJV3cpnuuS3mIQ5DCyI',   // Monthly: $138.89 x 9 payments
+  quarterly: 'price_1UBIHbJV3cpnuuS3iutoAPC1', // Quarterly: $416.67 x 3 payments
 };
 
 exports.handler = async (event) => {
@@ -25,7 +25,6 @@ exports.handler = async (event) => {
 
     const siteUrl = process.env.URL || 'http://localhost:8888';
 
-    // Build the request body as URL-encoded form data (what Stripe's API expects)
     const params = new URLSearchParams();
     params.append('line_items[0][price]', PRICE_IDS[plan]);
     params.append('line_items[0][quantity]', '1');
