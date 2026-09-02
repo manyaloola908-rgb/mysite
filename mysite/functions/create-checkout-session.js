@@ -1,9 +1,10 @@
 // functions/create-checkout-session.js
-// FINAL VERSION — live mode, no npm packages needed
+// No npm packages required — talks to Stripe directly over HTTPS using fetch,
+// so this works with plain Netlify drag-and-drop deploys.
 
 const PRICE_IDS = {
   full: 'price_1UBIb4JV3cpnuuS3ZoexygPL',      // Pay in full: $1,250 (one-time) [LIVE]
-  monthly: 'price_1UBIbeJV3cpnuuS30uXTV804',   // Monthly: $138.89 x 9 payments [LIVE]
+  monthly: 'price_1UBIbeJV3cpnuuS30uXTV8O4',   // Monthly: $138.89 x 9 payments [LIVE]
   quarterly: 'price_1UBIbyJV3cpnuuS3RjGmK8ym', // Quarterly: $416.67 x 3 payments [LIVE]
 };
 
@@ -24,6 +25,7 @@ exports.handler = async (event) => {
 
     const siteUrl = process.env.URL || 'http://localhost:8888';
 
+    // Build the request body as URL-encoded form data (what Stripe's API expects)
     const params = new URLSearchParams();
     params.append('line_items[0][price]', PRICE_IDS[plan]);
     params.append('line_items[0][quantity]', '1');
@@ -34,7 +36,9 @@ exports.handler = async (event) => {
       params.append('mode', 'payment');
     } else {
       params.append('mode', 'subscription');
-      // cancel_at is set later by stripe-webhook.js after the subscription is created
+      // Note: cancel_at can't be set during Checkout Session creation.
+      // A webhook (checkout.session.completed) will set the auto-cancel
+      // date on the subscription after it's created.
     }
 
     const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
