@@ -554,10 +554,7 @@ async function handleSubmit() {
       body: JSON.stringify(data)
     });
     if (response.ok) {
-      document.getElementById('form-fields').style.display = 'none';
-      const msg = document.getElementById('success-msg');
-      msg.style.display = 'block';
-      window.scrollTo({ top: msg.offsetTop - 100, behavior: 'smooth' });
+    window.location.href = 'pricing.html';
     } else {
       alert('There was a problem submitting. Please try again or email manya@chabadofdallas.com directly.');
       btn.disabled = false;
