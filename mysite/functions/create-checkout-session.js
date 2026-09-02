@@ -1,11 +1,11 @@
-// functions/create-checkout-session.js
-// No npm packages required — talks to Stripe directly over HTTPS using fetch,
-// so this works with plain Netlify drag-and-drop deploys.
+// netlify/functions/create-checkout-session.js
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+// Your three Price IDs from Stripe
 const PRICE_IDS = {
-  full: 'price_1UBIb4JV3cpnuuS3ZoexygPL',      // Pay in full: $1,250 (one-time) [LIVE]
-  monthly: 'price_1UBIbeJV3cpnuuS30uXTV804',   // Monthly: $138.89 x 9 payments [LIVE]
-  quarterly: 'price_1UBIbyJV3cpnuuS3RjGmK8ym', // Quarterly: $416.67 x 3 payments [LIVE]
+  full: 'price_1UAuWhJV3cpnuuS3lzrZ1xjz',      // Pay in full (one-time)
+  monthly: 'price_1UAuWhJV3cpnuuS3psgc3BhS',   // Monthly, billed over 9 months
+  quarterly: 'price_1UAuWhJV3cpnuuS31tKnWToi', // Quarterly, billed over 9 months
 };
 
 exports.handler = async (event) => {
@@ -25,49 +25,35 @@ exports.handler = async (event) => {
 
     const siteUrl = process.env.URL || 'http://localhost:8888';
 
-    const params = new URLSearchParams();
-    params.append('line_items[0][price]', PRICE_IDS[plan]);
-    params.append('line_items[0][quantity]', '1');
-    params.append('success_url', `${siteUrl}/success.html`);
-    params.append('cancel_url', `${siteUrl}/cancel.html`);
+    const sessionConfig = {
+      line_items: [{ price: PRICE_IDS[plan], quantity: 1 }],
+      success_url: `${siteUrl}/success.html`,
+      cancel_url: `${siteUrl}/cancel.html`,
+    };
 
     if (plan === 'full') {
-      params.append('mode', 'payment');
+      // One-time payment, no subscription involved
+      sessionConfig.mode = 'payment';
     } else {
-      params.append('mode', 'subscription');
+      // monthly or quarterly — both auto-stop after 9 months
+      sessionConfig.mode = 'subscription';
 
       const cancelDate = new Date();
       cancelDate.setMonth(cancelDate.getMonth() + 9);
-      const cancelAtTimestamp = Math.floor(cancelDate.getTime() / 1000);
 
-      params.append('subscription_data[cancel_at]', String(cancelAtTimestamp));
-    }
-
-    const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: params.toString(),
-    });
-
-    const session = await response.json();
-
-    if (!response.ok) {
-      console.error('Stripe API error:', session);
-      return {
-        statusCode: response.status,
-        body: JSON.stringify({ error: session.error?.message || 'Stripe request failed' }),
+      sessionConfig.subscription_data = {
+        cancel_at: Math.floor(cancelDate.getTime() / 1000),
       };
     }
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     return {
       statusCode: 200,
       body: JSON.stringify({ url: session.url }),
     };
   } catch (err) {
-    console.error('Function error:', err);
+    console.error('Stripe error:', err);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: err.message }),
