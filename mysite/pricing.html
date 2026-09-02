@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Choose Your Payment Plan</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f6f9fc;
+    margin: 0;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .container {
+    max-width: 900px;
+    width: 100%;
+  }
+  h1 {
+    text-align: center;
+    color: #1a1f36;
+    margin-bottom: 40px;
+  }
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .plan {
+    background: white;
+    border: 1px solid #e3e8ee;
+    border-radius: 12px;
+    padding: 30px 24px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .plan h2 {
+    font-size: 18px;
+    color: #1a1f36;
+    margin-bottom: 8px;
+  }
+  .plan .price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1f36;
+    margin-bottom: 4px;
+  }
+  .plan .detail {
+    font-size: 14px;
+    color: #697386;
+    margin-bottom: 24px;
+  }
+  .plan button {
+    width: 100%;
+    padding: 12px;
+    background: #635bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .plan button:hover {
+    background: #524ae0;
+  }
+  .plan button:disabled {
+    background: #b3b9c4;
+    cursor: not-allowed;
+  }
+  .error {
+    color: #d1242f;
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Choose Your Payment Plan</h1>
+  <div class="plans">
+
+    <div class="plan">
+      <h2>Pay in Full</h2>
+      <div class="price">$900</div>
+      <div class="detail">One-time payment</div>
+      <button data-plan="full">Select</button>
+    </div>
+
+    <div class="plan">
+      <h2>Monthly</h2>
+      <div class="price">$100/mo</div>
+      <div class="detail">9 monthly payments</div>
+      <button data-plan="monthly">Select</button>
+    </div>
+
+    <div class="plan">
+      <h2>Quarterly</h2>
+      <div class="price">$300</div>
+      <div class="detail">Every 3 months, 3 payments</div>
+      <button data-plan="quarterly">Select</button>
+    </div>
+
+  </div>
+  <p class="error" id="error-msg">Something went wrong. Please try again.</p>
+</div>
+
+<script>
+  document.querySelectorAll('button[data-plan]').forEach(button => {
+    button.addEventListener('click', async () => {
+      const plan = button.dataset.plan;
+      const errorMsg = document.getElementById('error-msg');
+      errorMsg.style.display = 'none';
+
+      document.querySelectorAll('button[data-plan]').forEach(b => b.disabled = true);
+      button.textContent = 'Loading...';
+
+      try {
+        const response = await fetch('/.netlify/functions/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ plan }),
+        });
+
+        const data = await response.json();
+
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          throw new Error(data.error || 'No checkout URL returned');
+        }
+      } catch (err) {
+        console.error(err);
+        errorMsg.style.display = 'block';
+        document.querySelectorAll('button[data-plan]').forEach(b => b.disabled = false);
+        button.textContent = 'Select';
+      }
+    });
+  });
+</script>
+</body>
+</html>
