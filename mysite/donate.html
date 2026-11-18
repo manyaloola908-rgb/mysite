@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" href="images/favicon.png"/>
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Donate — JUDA Dallas</title>
+<meta name="description" content="Support JUDA Dallas Hebrew School — Judaism Through the Arts."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --coral: #E8564A; --coral-light: #F9E8E7; --coral-dark: #C0392B;
+    --teal: #3AAFA9; --teal-light: #E0F4F3; --teal-dark: #2A7F7A;
+    --white: #FFFFFF; --off-white: #FAF9F7; --text: #2C2C2A; --muted: #6B6B68; --border: rgba(0,0,0,0.1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); }
+  a { color: inherit; text-decoration: none; }
+
+  nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .logo-img { height: 50px; width: auto; display: block; }
+  .logo-circle { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--coral) 50%, var(--teal) 50%); }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.2; }
+  .logo-text span { color: var(--coral); }
+  .logo-sub { font-size: 11px; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 400; }
+  .nav-links { display: flex; gap: 1.3rem; list-style: none; font-size: 13px; font-weight: 500; }
+  .nav-links a { color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--coral); }
+  .nav-cta { background: var(--coral); color: var(--white); padding: 8px 18px; border-radius: 24px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--coral-dark); }
+
+  .hero { background: var(--teal); padding: 4rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; bottom: -60px; left: -10%; width: 120%; height: 120px; background: var(--white); border-radius: 50%; }
+  .hero-badge { display: inline-block; background: rgba(255,255,255,0.2); color: var(--white); font-size: 13px; padding: 4px 16px; border-radius: 20px; margin-bottom: 1rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--white); line-height: 1.2; max-width: 680px; margin: 0 auto 0.6rem; }
+  .hero h1 span { color: #FFD98E; }
+  .hero-tagline { font-size: 14px; color: rgba(255,255,255,0.75); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 500; }
+  .hero-project { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 0.5rem; }
+  .hero p { color: rgba(255,255,255,0.88); font-size: 17px; max-width: 520px; margin: 0 auto 2rem; line-height: 1.6; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--coral); color: var(--white); padding: 12px 28px; border-radius: 28px; font-size: 15px; font-weight: 500; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+  .btn-primary:hover { background: var(--coral-dark); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--white); padding: 12px 28px; border-radius: 28px; font-size: 15px; font-weight: 500; border: 2px solid rgba(255,255,255,0.6); cursor: pointer; }
+  .btn-outline:hover { border-color: var(--white); }
+
+  section { padding: 3.5rem 2rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+  .section-title span { color: var(--teal); }
+  .section-sub { font-size: 15px; color: var(--muted); margin-bottom: 2rem; max-width: 540px; }
+
+  .about-section { background: var(--white); }
+  .about-wrap { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { font-size: 15px; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  .about-text strong { color: var(--coral); }
+  .about-time { display: inline-flex; align-items: center; gap: 8px; background: var(--teal-light); color: var(--teal-dark); font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 24px; margin-top: 1.2rem; }
+  .about-pillars { display: flex; flex-direction: column; gap: 1rem; }
+  .pillar { background: var(--off-white); border-radius: 12px; padding: 1.1rem 1.2rem; border-left: 4px solid var(--teal); }
+  .pillar:nth-child(2) { border-left-color: var(--coral); }
+  .pillar:nth-child(3) { border-left-color: #5DCAA5; }
+  .pillar h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .pillar p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .aleph-blurb { margin-top: 1.5rem; background: linear-gradient(135deg, var(--teal-light), var(--coral-light)); border-radius: 14px; padding: 1.3rem 1.4rem; border: 1px solid var(--border); }
+  .aleph-blurb-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .aleph-champ-logo { display: flex; gap: 3px; }
+  .belt-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .aleph-blurb-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text); }
+  .aleph-blurb p { font-size: 13px; color: var(--muted); line-height: 1.65; margin: 0; }
+
+  .photos-section { background: var(--off-white); }
+  .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 860px; margin: 0 auto; }
+  .photo-card { border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; }
+  .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .calendar-section { max-width: 560px; margin: 0 auto; }
+  .cal-event { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .cal-date { background: var(--teal-light); border-radius: 8px; min-width: 56px; text-align: center; padding: 8px 4px; flex-shrink: 0; }
+  .cal-month { font-size: 10px; font-weight: 500; text-transform: uppercase; color: var(--teal-dark); letter-spacing: 0.5px; }
+  .cal-day { font-size: 26px; font-weight: 700; font-family: 'Playfair Display', serif; color: var(--teal-dark); line-height: 1; }
+  .cal-info h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .cal-info p { font-size: 13px; color: var(--muted); }
+  .cal-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-top: 8px; background: var(--coral-light); color: var(--coral-dark); font-weight: 500; }
+
+  .tuition-section { background: var(--off-white); }
+  .tuition-wrap { max-width: 860px; margin: 0 auto; }
+  .tuition-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .tuition-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s, transform 0.15s; position: relative; }
+  .tuition-card:hover { border-color: var(--coral); transform: translateY(-2px); }
+  .tuition-card.featured { border-color: var(--coral); background: var(--coral-light); }
+  .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--coral); color: var(--white); font-size: 11px; padding: 3px 12px; border-radius: 12px; white-space: nowrap; font-weight: 500; }
+  .tuition-tier { font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tuition-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--text); }
+  .tuition-price span { font-size: 1rem; font-family: 'DM Sans', sans-serif; color: var(--muted); }
+  .tuition-desc { font-size: 13px; color: var(--muted); margin: 8px 0 14px; line-height: 1.5; }
+  .tuition-features { list-style: none; font-size: 13px; margin-bottom: 1.2rem; }
+  .tuition-features li { padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; color: var(--muted); }
+  .tuition-features li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+  .tuition-btn { width: 100%; padding: 10px; border-radius: 24px; border: 1.5px solid var(--coral); background: transparent; color: var(--coral); font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .tuition-btn:hover, .tuition-card.featured .tuition-btn { background: var(--coral); color: var(--white); }
+
+  .bnei-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 860px; margin: 0 auto; }
+  .bnei-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s; }
+  .bnei-card:hover { border-color: var(--teal); }
+  .bnei-type { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--teal-dark); background: var(--teal-light); display: inline-block; padding: 3px 10px; border-radius: 10px; margin-bottom: 10px; }
+  .bnei-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+  .bnei-title { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .bnei-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .bnei-phone { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; margin-top: 12px; }
+  .bnei-phone a { color: var(--coral); }
+
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 860px; margin: 0 auto; }
+  .testimonial-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem; }
+  .stars { color: var(--coral); font-size: 14px; margin-bottom: 10px; letter-spacing: 2px; }
+  .testimonial-text { font-size: 14px; line-height: 1.6; margin-bottom: 1rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--white); flex-shrink: 0; }
+  .author-name { font-size: 13px; font-weight: 500; }
+  .author-child { font-size: 12px; color: var(--muted); }
+
+  .registration-section { background: var(--teal); }
+  .reg-wrap { max-width: 700px; margin: 0 auto; }
+  .registration-section .section-title { color: var(--white); }
+  .registration-section .section-title span { color: #FFD98E; }
+  .registration-section .section-sub { color: rgba(255,255,255,0.85); }
+  .reg-form { background: var(--white); border-radius: 16px; padding: 2rem; }
+  .form-section-label { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--teal-dark); border-bottom: 1.5px solid var(--teal-light); padding-bottom: 6px; margin: 1.5rem 0 1rem; }
+  .form-section-label:first-of-type { margin-top: 0; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 13px; font-weight: 500; color: var(--text); }
+  .label-hint { font-size: 11px; color: var(--muted); font-style: italic; font-weight: 400; }
+  input, select, textarea { padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); transition: border-color 0.2s; outline: none; width: 100%; }
+  input:focus, select:focus, textarea:focus { border-color: var(--teal); }
+  textarea { resize: vertical; min-height: 80px; }
+  .radio-group { display: flex; gap: 1.5rem; margin-top: 4px; }
+  .radio-group label { display: flex; align-items: center; gap: 6px; font-weight: 400; cursor: pointer; font-size: 14px; }
+  .radio-group input[type="radio"] { width: auto; padding: 0; border: none; accent-color: var(--teal); }
+  .sibling-note { background: var(--teal-light); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--teal-dark); margin-bottom: 12px; }
+  .submit-btn { width: 100%; padding: 14px; background: var(--coral); color: var(--white); border: none; border-radius: 28px; font-size: 16px; font-weight: 500; cursor: pointer; margin-top: 1rem; transition: background 0.2s; font-family: 'DM Sans', sans-serif; }
+  .submit-btn:hover { background: var(--coral-dark); }
+  .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+  .form-note { text-align: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .required { color: var(--coral); }
+  .success-msg { background: var(--teal-light); border: 1.5px solid var(--teal); border-radius: 12px; padding: 1.5rem; text-align: center; display: none; }
+  .success-msg h3 { font-family: 'Playfair Display', serif; color: var(--teal-dark); margin-bottom: 6px; }
+  .success-msg p { font-size: 14px; color: var(--muted); }
+
+  footer { background: var(--text); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem; font-size: 13px; line-height: 2; }
+  footer strong { color: var(--white); }
+  footer a { color: var(--teal); }
+
+  @media (max-width: 640px) {
+    .about-wrap { grid-template-columns: 1fr; gap: 2rem; }
+    .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    .tuition-cards, .bnei-cards, .testimonials-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  /* Photo slider */
+  .slider { position: relative; max-width: 1100px; margin: 0 auto; }
+  .slider-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 4px 8px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .slider-track::-webkit-scrollbar { display: none; }
+  .slide { flex: 0 0 auto; height: 420px; border-radius: 14px; overflow: hidden; scroll-snap-align: center; background: var(--teal-light); box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .slide img { height: 100%; width: auto; display: block; }
+  .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); color: var(--coral); font-size: 30px; line-height: 1; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.15); transition: background 0.2s, color 0.2s; }
+  .slider-btn:hover { background: var(--coral); color: var(--white); }
+  .slider-btn.prev { left: 8px; } .slider-btn.next { right: 8px; }
+  .slider-dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; flex-wrap: wrap; }
+  .slider-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; background: rgba(0,0,0,0.18); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+  .slider-dots button.active { background: var(--coral); transform: scale(1.3); }
+  .nav-links a.nav-donate { color: var(--coral); font-weight: 700; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-donate-mobile { display: none; color: var(--coral); font-weight: 700; font-size: 14px; }
+  @media (max-width: 640px) { .nav-donate-mobile { display: inline; } .logo-sub { display: none; } nav { padding: 0 1rem; } .logo-img { height: 44px; } }
+  @media (max-width: 640px) {
+    .slide { height: 340px; }
+    .slider-btn { width: 36px; height: 36px; font-size: 24px; }
+  }
+</style>
+<style>
+  .donate-wrap { max-width: 460px; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; width: 100%; flex: 1; }
+  body { display: flex; flex-direction: column; min-height: 100vh; }
+  .donate-card { background: var(--white); border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 6px 30px rgba(0,0,0,0.08); padding: 2rem; }
+  .donate-card h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 0.3rem; }
+  .donate-card .hint { font-size: 14px; color: var(--muted); margin-bottom: 1.3rem; }
+  .amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .amt { padding: 14px 6px; border: 1.5px solid var(--border); border-radius: 12px; background: var(--white); font-family: 'DM Sans', sans-serif; font-size: 17px; font-weight: 500; color: var(--text); cursor: pointer; transition: all 0.15s; }
+  .amt:hover { border-color: var(--teal); }
+  .amt.active { background: var(--teal); border-color: var(--teal); color: var(--white); }
+  .amt small { display: block; font-size: 11px; font-weight: 400; opacity: 0.75; margin-top: 2px; }
+  .other-wrap { margin-top: 12px; position: relative; }
+  .other-wrap span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 17px; }
+  .other-wrap input { padding: 14px 14px 14px 30px; font-size: 17px; border-radius: 12px; }
+  .other-wrap input:focus { border-color: var(--teal); }
+  .donate-btn { width: 100%; margin-top: 1.3rem; padding: 16px; background: var(--coral); color: var(--white); border: none; border-radius: 30px; font-size: 17px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+  .donate-btn:hover { background: var(--coral-dark); transform: translateY(-1px); }
+  .donate-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+  .secure { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; font-size: 12.5px; color: var(--muted); }
+  .error { color: var(--coral-dark); font-size: 13px; margin-top: 8px; min-height: 1em; }
+  .why { padding: 0.5rem 0.5rem; }
+  .why h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 3.6rem 0 1rem; }
+  .why-item { display: flex; gap: 12px; margin-bottom: 1rem; }
+  .why-dot { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .why-item h4 { font-size: 15px; margin-bottom: 2px; }
+  .why-item p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+  .contact-note { margin-top: 1.4rem; font-size: 13.5px; color: var(--muted); line-height: 1.7; background: var(--off-white); border-radius: 12px; padding: 1rem 1.2rem; }
+  .contact-note a { color: var(--teal-dark); font-weight: 500; }
+  .hero.donate-hero { padding: 3.5rem 2rem 5.5rem; }
+  @media (max-width: 760px) {
+    .donate-wrap { grid-template-columns: 1fr; }
+    .why h3 { margin-top: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="images/logo-header.png" alt="JUDA logo" class="logo-img"/>
+    <div class="logo-text">
+      <span>JUDA</span> Dallas
+      <div class="logo-sub">Judaism Through the Arts &middot; A Project of Chabad of Dallas &amp; Tiferet Israel</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#photos">Gallery</a></li>
+    <li><a href="index.html#calendar">Calendar</a></li>
+    <li><a href="index.html#tuition">Tuition</a></li>
+    <li><a href="index.html#bnei">Bar &amp; Bat Mitzvah</a></li>
+    <li><a href="index.html#register">Register</a></li>
+    <li><a href="donate.html" class="nav-donate">Donate</a></li>
+  </ul>
+  <div class="nav-right"><a href="donate.html" class="nav-donate-mobile">Donate</a><button class="nav-cta" onclick="location.href='index.html#register'">Enroll Now</button></div>
+</nav>
+
+<div class="donate-wrap">
+  <div class="donate-card">
+    <div class="amounts" id="amounts">
+      <button class="amt" data-amt="18">$18</button>
+      <button class="amt active" data-amt="36">$36</button>
+      <button class="amt" data-amt="54">$54</button>
+      <button class="amt" data-amt="100">$100</button>
+      <button class="amt" data-amt="180">$180</button>
+      <button class="amt" data-amt="360">$360</button>
+    </div>
+    <div class="other-wrap">
+      <span>$</span>
+      <input type="number" id="other" min="1" step="1" inputmode="decimal" placeholder="Other amount" aria-label="Other amount in dollars"/>
+    </div>
+    <div class="error" id="err"></div>
+    <button class="donate-btn" id="donate-btn">Donate $36</button>
+  </div>
+</div>
+
+<footer>
+  <strong>JUDA Dallas &mdash; Judaism Through the Arts</strong><br/>
+  A Project of Chabad of Dallas &amp; Tiferet Israel<br/>
+  Tiferet Israel &middot; 10909 Hillcrest Rd, Dallas, TX 75230<br/>
+  Phone: <a href="tel:2149297968">(214) 929-7968</a> &middot; Email: <a href="mailto:manya@chabadofdallas.com">manya@chabadofdallas.com</a> &middot; <a href="donate.html" style="text-decoration:underline;">Donate</a><br/>
+  <span style="margin-top:4px;display:block;font-size:12px;color:rgba(255,255,255,0.4);">&copy; 2026 JUDA Dallas. All rights reserved.</span>
+</footer>
+
+<script>
+(function () {
+  var LINK = 'https://donate.stripe.com/6oUeVe9SH4e40B36vZ7ok02';
+  var amount = 36;
+  var btns = document.querySelectorAll('.amt');
+  var other = document.getElementById('other');
+  var donate = document.getElementById('donate-btn');
+  var err = document.getElementById('err');
+
+  function fmt(n) { return n % 1 === 0 ? n.toLocaleString('en-US') : n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}); }
+  function refresh() {
+    err.textContent = '';
+    if (amount && amount >= 1) { donate.disabled = false; donate.textContent = 'Donate $' + fmt(amount); }
+    else { donate.disabled = true; donate.textContent = 'Enter an amount'; }
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      other.value = '';
+      amount = parseFloat(b.getAttribute('data-amt'));
+      refresh();
+    });
+  });
+  other.addEventListener('input', function () {
+    btns.forEach(function (x) { x.classList.remove('active'); });
+    var v = parseFloat(other.value);
+    amount = isNaN(v) ? 0 : Math.round(v * 100) / 100;
+    refresh();
+  });
+  donate.addEventListener('click', function () {
+    if (!amount || amount < 1) { err.textContent = 'Please enter an amount of at least $1.'; return; }
+    var cents = Math.round(amount * 100);
+    window.location.href = LINK + '?prefilled_amount=' + cents;
+  });
+  refresh();
+})();
+</script>
+</body>
+</html>
