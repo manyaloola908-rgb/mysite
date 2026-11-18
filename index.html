@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/png" href="images/favicon.png"/>
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JUDA Dallas — Judaism Through the Arts</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --coral: #E8564A; --coral-light: #F9E8E7; --coral-dark: #C0392B;
+    --teal: #3AAFA9; --teal-light: #E0F4F3; --teal-dark: #2A7F7A;
+    --white: #FFFFFF; --off-white: #FAF9F7; --text: #2C2C2A; --muted: #6B6B68; --border: rgba(0,0,0,0.1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); }
+  a { color: inherit; text-decoration: none; }
+
+  nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .nav-logo { display: flex; align-items: center; gap: 10px; }
+  .logo-img { height: 50px; width: auto; display: block; }
+  .logo-circle { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--coral) 50%, var(--teal) 50%); }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.2; }
+  .logo-text span { color: var(--coral); }
+  .logo-sub { font-size: 11px; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 400; }
+  .nav-links { display: flex; gap: 1.3rem; list-style: none; font-size: 13px; font-weight: 500; }
+  .nav-links a { color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--coral); }
+  .nav-cta { background: var(--coral); color: var(--white); padding: 8px 18px; border-radius: 24px; font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--coral-dark); }
+
+  .hero { background: var(--teal); padding: 4rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; bottom: -60px; left: -10%; width: 120%; height: 120px; background: var(--white); border-radius: 50%; }
+  .hero-badge { display: inline-block; background: rgba(255,255,255,0.2); color: var(--white); font-size: 13px; padding: 4px 16px; border-radius: 20px; margin-bottom: 1rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--white); line-height: 1.2; max-width: 680px; margin: 0 auto 0.6rem; }
+  .hero h1 span { color: #FFD98E; }
+  .hero-logo { display: inline-block; background: var(--white); border-radius: 18px; padding: 14px 26px; margin-bottom: 1.3rem; box-shadow: 0 6px 24px rgba(0,0,0,0.12); position: relative; z-index: 1; }
+  .hero-logo img { display: block; width: 320px; max-width: 70vw; height: auto; }
+  .hero > * { position: relative; z-index: 1; }
+  .hero-badge { display: table; margin-left: auto; margin-right: auto; }
+  .hero-tagline { font-size: 14px; color: rgba(255,255,255,0.75); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 500; }
+  .hero-project { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 0.5rem; }
+  .hero p { color: rgba(255,255,255,0.88); font-size: 17px; max-width: 520px; margin: 0 auto 2rem; line-height: 1.6; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--coral); color: var(--white); padding: 12px 28px; border-radius: 28px; font-size: 15px; font-weight: 500; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+  .btn-primary:hover { background: var(--coral-dark); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--white); padding: 12px 28px; border-radius: 28px; font-size: 15px; font-weight: 500; border: 2px solid rgba(255,255,255,0.6); cursor: pointer; }
+  .btn-outline:hover { border-color: var(--white); }
+
+  section { padding: 3.5rem 2rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+  .section-title span { color: var(--teal); }
+  .section-sub { font-size: 15px; color: var(--muted); margin-bottom: 2rem; max-width: 540px; }
+
+  .about-section { background: var(--white); }
+  .about-wrap { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { font-size: 15px; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  .about-text strong { color: var(--coral); }
+  .about-time { display: inline-flex; align-items: center; gap: 8px; background: var(--teal-light); color: var(--teal-dark); font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 24px; margin-top: 1.2rem; }
+  .about-pillars { display: flex; flex-direction: column; gap: 1rem; }
+  .pillar { background: var(--off-white); border-radius: 12px; padding: 1.1rem 1.2rem; border-left: 4px solid var(--teal); }
+  .pillar:nth-child(2) { border-left-color: var(--coral); }
+  .pillar:nth-child(3) { border-left-color: #5DCAA5; }
+  .pillar h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .pillar p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .aleph-blurb { margin-top: 1.5rem; background: linear-gradient(135deg, var(--teal-light), var(--coral-light)); border-radius: 14px; padding: 1.3rem 1.4rem; border: 1px solid var(--border); }
+  .aleph-blurb-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .aleph-champ-logo { display: flex; gap: 3px; }
+  .belt-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .aleph-blurb-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text); }
+  .aleph-blurb p { font-size: 13px; color: var(--muted); line-height: 1.65; margin: 0; }
+
+  .photos-section { background: var(--off-white); }
+  .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 860px; margin: 0 auto; }
+  .photo-card { border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; }
+  .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .calendar-section { max-width: 560px; margin: 0 auto; }
+  .cal-event { display: flex; align-items: flex-start; gap: 14px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; }
+  .cal-date { background: var(--teal-light); border-radius: 8px; min-width: 56px; text-align: center; padding: 8px 4px; flex-shrink: 0; }
+  .cal-month { font-size: 10px; font-weight: 500; text-transform: uppercase; color: var(--teal-dark); letter-spacing: 0.5px; }
+  .cal-day { font-size: 26px; font-weight: 700; font-family: 'Playfair Display', serif; color: var(--teal-dark); line-height: 1; }
+  .cal-info h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .cal-info p { font-size: 13px; color: var(--muted); }
+  .cal-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-top: 8px; background: var(--coral-light); color: var(--coral-dark); font-weight: 500; }
+
+  .tuition-section { background: var(--off-white); }
+  .tuition-wrap { max-width: 860px; margin: 0 auto; }
+  .tuition-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .tuition-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s, transform 0.15s; position: relative; }
+  .tuition-card:hover { border-color: var(--coral); transform: translateY(-2px); }
+  .tuition-card.featured { border-color: var(--coral); background: var(--coral-light); }
+  .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--coral); color: var(--white); font-size: 11px; padding: 3px 12px; border-radius: 12px; white-space: nowrap; font-weight: 500; }
+  .tuition-tier { font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tuition-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--text); }
+  .tuition-price span { font-size: 1rem; font-family: 'DM Sans', sans-serif; color: var(--muted); }
+  .tuition-desc { font-size: 13px; color: var(--muted); margin: 8px 0 14px; line-height: 1.5; }
+  .tuition-features { list-style: none; font-size: 13px; margin-bottom: 1.2rem; }
+  .tuition-features li { padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; color: var(--muted); }
+  .tuition-features li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+  .tuition-btn { width: 100%; padding: 10px; border-radius: 24px; border: 1.5px solid var(--coral); background: transparent; color: var(--coral); font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .tuition-btn:hover, .tuition-card.featured .tuition-btn { background: var(--coral); color: var(--white); }
+
+  .bnei-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 860px; margin: 0 auto; }
+  .bnei-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s; }
+  .bnei-card:hover { border-color: var(--teal); }
+  .bnei-type { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--teal-dark); background: var(--teal-light); display: inline-block; padding: 3px 10px; border-radius: 10px; margin-bottom: 10px; }
+  .bnei-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+  .bnei-title { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .bnei-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .bnei-phone { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; margin-top: 12px; }
+  .bnei-phone a { color: var(--coral); }
+
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 860px; margin: 0 auto; }
+  .testimonial-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.4rem; }
+  .stars { color: var(--coral); font-size: 14px; margin-bottom: 10px; letter-spacing: 2px; }
+  .testimonial-text { font-size: 14px; line-height: 1.6; margin-bottom: 1rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 10px; }
+  .author-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--white); flex-shrink: 0; }
+  .author-name { font-size: 13px; font-weight: 500; }
+  .author-child { font-size: 12px; color: var(--muted); }
+
+  .registration-section { background: var(--teal); }
+  .reg-wrap { max-width: 700px; margin: 0 auto; }
+  .registration-section .section-title { color: var(--white); }
+  .registration-section .section-title span { color: #FFD98E; }
+  .registration-section .section-sub { color: rgba(255,255,255,0.85); }
+  .reg-form { background: var(--white); border-radius: 16px; padding: 2rem; }
+  .form-section-label { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--teal-dark); border-bottom: 1.5px solid var(--teal-light); padding-bottom: 6px; margin: 1.5rem 0 1rem; }
+  .form-section-label:first-of-type { margin-top: 0; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 13px; font-weight: 500; color: var(--text); }
+  .label-hint { font-size: 11px; color: var(--muted); font-style: italic; font-weight: 400; }
+  input, select, textarea { padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); transition: border-color 0.2s; outline: none; width: 100%; }
+  input:focus, select:focus, textarea:focus { border-color: var(--teal); }
+  textarea { resize: vertical; min-height: 80px; }
+  .radio-group { display: flex; gap: 1.5rem; margin-top: 4px; }
+  .radio-group label { display: flex; align-items: center; gap: 6px; font-weight: 400; cursor: pointer; font-size: 14px; }
+  .radio-group input[type="radio"] { width: auto; padding: 0; border: none; accent-color: var(--teal); }
+  .sibling-note { background: var(--teal-light); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--teal-dark); margin-bottom: 12px; }
+  .submit-btn { width: 100%; padding: 14px; background: var(--coral); color: var(--white); border: none; border-radius: 28px; font-size: 16px; font-weight: 500; cursor: pointer; margin-top: 1rem; transition: background 0.2s; font-family: 'DM Sans', sans-serif; }
+  .submit-btn:hover { background: var(--coral-dark); }
+  .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+  .form-note { text-align: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .required { color: var(--coral); }
+  .success-msg { background: var(--teal-light); border: 1.5px solid var(--teal); border-radius: 12px; padding: 1.5rem; text-align: center; display: none; }
+  .success-msg h3 { font-family: 'Playfair Display', serif; color: var(--teal-dark); margin-bottom: 6px; }
+  .success-msg p { font-size: 14px; color: var(--muted); }
+
+  footer { background: var(--text); color: rgba(255,255,255,0.7); text-align: center; padding: 2rem; font-size: 13px; line-height: 2; }
+  footer strong { color: var(--white); }
+  footer a { color: var(--teal); }
+
+  @media (max-width: 640px) {
+    .about-wrap { grid-template-columns: 1fr; gap: 2rem; }
+    .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    .tuition-cards, .bnei-cards, .testimonials-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+
+  /* Photo slider */
+  .slider { position: relative; max-width: 1100px; margin: 0 auto; }
+  .slider-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 4px 8px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .slider-track::-webkit-scrollbar { display: none; }
+  .slide { flex: 0 0 auto; height: 420px; border-radius: 14px; overflow: hidden; scroll-snap-align: center; background: var(--teal-light); box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .slide img { height: 100%; width: auto; display: block; }
+  .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); color: var(--coral); font-size: 30px; line-height: 1; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.15); transition: background 0.2s, color 0.2s; }
+  .slider-btn:hover { background: var(--coral); color: var(--white); }
+  .slider-btn.prev { left: 8px; } .slider-btn.next { right: 8px; }
+  .slider-dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; flex-wrap: wrap; }
+  .slider-dots button { width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; background: rgba(0,0,0,0.18); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+  .slider-dots button.active { background: var(--coral); transform: scale(1.3); }
+  .nav-links a.nav-donate { color: var(--coral); font-weight: 700; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-donate-mobile { display: none; color: var(--coral); font-weight: 700; font-size: 14px; }
+  @media (max-width: 640px) { .nav-donate-mobile { display: inline; } .logo-sub { display: none; } nav { padding: 0 1rem; } .logo-img { height: 44px; } }
+  @media (max-width: 640px) {
+    .slide { height: 340px; }
+    .slider-btn { width: 36px; height: 36px; font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="images/logo-header.png" alt="JUDA logo" class="logo-img"/>
+    <div class="logo-text">
+      <span>JUDA</span> Dallas
+      <div class="logo-sub">Judaism Through the Arts &middot; A Project of Chabad of Dallas &amp; Tiferet Israel</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#photos">Gallery</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#tuition">Tuition</a></li>
+    <li><a href="#bnei">Bar &amp; Bat Mitzvah</a></li>
+    <li><a href="#register">Register</a></li>
+    <li><a href="donate.html" class="nav-donate">Donate</a></li>
+  </ul>
+  <div class="nav-right"><a href="donate.html" class="nav-donate-mobile">Donate</a><button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Enroll Now</button></div>
+</nav>
+
+<div class="hero">
+  <div class="hero-logo"><img src="images/logo-main.png" alt="JUDA — Judaism Through the Arts"/></div>
+  <div class="hero-badge">Enrollment Open for 2026&ndash;2027</div>
+  <h1>Where Judaism Comes <span>Alive</span></h1>
+  <div class="hero-project">A Project of Chabad of Dallas &amp; Tiferet Israel</div>
+  <p>JUDA Dallas is a warm, encouraging Hebrew school where every child is met where they are &mdash; and celebrated for how far they grow.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Your Child</button>
+    <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More</button>
+  </div>
+</div>
+
+<section class="about-section" id="about">
+  <div class="about-wrap">
+    <div class="about-text">
+      <div class="section-title" style="margin-bottom:1rem;">A <span>Place to Learn &amp; Grow</span></div>
+      <p>Imagine a Hebrew school where kids don't want to miss a day. They walk in with a smile and leave humming a Hebrew song. Through the halls you can hear lively discussion, singing, laughter, and the sounds of a community that truly loves being Jewish. Imagine your child feeling the warmth and spirit of Judaism — and imagine the pride you'll feel watching it happen.</p>
+      <p>Welcome to JUDA Dallas — an exciting, innovative Hebrew school with a well-earned reputation for creative, meaningful Jewish education. We welcome children from all backgrounds and affiliations, from Kindergarten through 8th grade. Synagogue membership is never required. Every child belongs here.</p>
+      <p>At JUDA Dallas, we move past traditional Hebrew school methods and embrace a fresh, dynamic approach. Through art, music, baking, drama, and hands-on creative experiences, every Sunday becomes its own adventure. Jewish holidays and traditions don't just get taught — they get lived. And woven through it all is our outstanding <strong>Aleph Champ</strong> Hebrew reading program, which meets every child exactly where they are and builds real, lasting fluency in the language of our people — one proud level at a time.</p>
+      <p>We encourage you as a parent to get involved, ask questions, and stay connected. Our door — and our inbox — is always open.</p>
+      <div class="about-time">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="var(--teal-dark)" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="var(--teal-dark)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Sundays, 10:00 AM &ndash; 12:00 PM
+      </div>
+      <div class="aleph-blurb">
+        <div class="aleph-blurb-header">
+          <div class="aleph-champ-logo">
+            <div class="belt-dot" style="background:#FFFFFF;border:1px solid #ccc;"></div>
+            <div class="belt-dot" style="background:#FFD700;"></div>
+            <div class="belt-dot" style="background:#FFA500;"></div>
+            <div class="belt-dot" style="background:#FF0000;"></div>
+            <div class="belt-dot" style="background:#800080;"></div>
+            <div class="belt-dot" style="background:#0000FF;"></div>
+            <div class="belt-dot" style="background:#008000;"></div>
+            <div class="belt-dot" style="background:#8B4513;"></div>
+            <div class="belt-dot" style="background:#808080;"></div>
+            <div class="belt-dot" style="background:#000000;"></div>
+          </div>
+          <div class="aleph-blurb-title">Aleph Champ Hebrew Reading</div>
+        </div>
+        <p>Hebrew reading is taught through the <strong style="color:var(--teal-dark);">Aleph Champ</strong> program, which meets each child exactly where they are. Inspired by karate belt levels, students progress through 10 color-coded levels at their own pace &mdash; building confidence and skills step by step. No child is ever compared to another or made to feel behind. Each level mastered is a real accomplishment, and that sense of pride is what keeps children motivated and eager to keep going.</p>
+      </div>
+    </div>
+    <div class="about-pillars">
+      <div class="pillar">
+        <h4>Judaism They Can Feel</h4>
+        <p>We make Judaism something children genuinely connect with — through creativity, story, song, and experience. When learning is fun and memorable, it sticks for life.</p>
+      </div>
+      <div class="pillar">
+        <h4>Encouraging &amp; Positive Environment</h4>
+        <p>Every child learns differently and at their own pace. We meet them where they are, cheer on their progress, and make sure no child ever feels left behind.</p>
+      </div>
+      <div class="pillar">
+        <h4>Jewish Values &amp; Identity</h4>
+        <p>Alongside language and learning, we nurture a warm connection to Jewish holidays, traditions, and values that children carry with them for life.</p>
+      </div>
+      <div style="background: linear-gradient(135deg, var(--teal-light), var(--coral-light)); border-radius: 12px; padding: 1.3rem 1.4rem; border: 2px solid var(--coral); box-shadow: 0 2px 12px rgba(232,86,74,0.12);">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+          <div style="width:8px; height:8px; border-radius:50%; background:var(--coral); flex-shrink:0;"></div>
+          <h4 style="font-size:15px; font-weight:700; color:var(--text); letter-spacing:0.2px;">Parents Program</h4>
+        </div>
+        <p style="font-size:13.5px; color:var(--text); line-height:1.7;">While the kids are in class, parents are invited to their own <strong style="color:var(--coral);">30&ndash;45 minute session every Sunday</strong>. It's a warm space to explore Jewish ideas, traditions, values, and practical Judaism &mdash; often connected to exactly what your child is learning that very week. Jewish education really does work best when the whole family is growing together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="photos-section" id="photos">
+  <div style="text-align:center; max-width:860px; margin:0 auto 2rem;">
+    <div class="section-title">Life at <span>JUDA Dallas</span></div>
+    <div class="section-sub" style="margin:0 auto;">A glimpse into our community of learners.</div>
+  </div>
+  <div class="slider" id="gallery-slider">
+    <button class="slider-btn prev" aria-label="Previous photo">&#8249;</button>
+    <div class="slider-track" tabindex="0">
+      <div class="slide"><img src="images/gallery/photo-1.jpg" alt="Students at JUDA Dallas Hebrew School" loading="eager"/></div>
+      <div class="slide"><img src="images/gallery/photo-2.jpg" alt="Students at JUDA Dallas Hebrew School" loading="eager"/></div>
+      <div class="slide"><img src="images/gallery/photo-3.jpg" alt="Students at JUDA Dallas Hebrew School" loading="eager"/></div>
+      <div class="slide"><img src="images/gallery/photo-4.jpg" alt="Students at JUDA Dallas Hebrew School" loading="eager"/></div>
+      <div class="slide"><img src="images/gallery/photo-5.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/photo-6.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/photo-7.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/photo-8.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/photo-9.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/photo-10.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/orig-1.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/orig-2.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/orig-3.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/orig-4.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/orig-5.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+      <div class="slide"><img src="images/gallery/orig-6.jpg" alt="Students at JUDA Dallas Hebrew School" loading="lazy"/></div>
+    </div>
+    <button class="slider-btn next" aria-label="Next photo">&#8250;</button>
+  </div>
+  <div class="slider-dots" id="gallery-dots"></div>
+</section>
+
+<section id="calendar" style="background:var(--white)">
+  <div class="calendar-section">
+    <div style="margin-bottom:2rem;">
+      <div class="section-title">Upcoming <span>Events</span></div>
+      <div class="section-sub">Mark your calendar &mdash; we can't wait to see you.</div>
+    </div>
+    <div class="cal-event">
+      <div class="cal-date"><div class="cal-month">Aug</div><div class="cal-day">23</div></div>
+      <div class="cal-info">
+        <h4>First Day of Hebrew School</h4>
+        <p>Sunday, 10:00 AM &ndash; 12:00 PM &middot; Tiferet Israel, 10909 Hillcrest Rd, Dallas, TX 75230</p>
+        <span class="cal-tag">School</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tuition-section" id="tuition">
+  <div class="tuition-wrap">
+    <div style="margin-bottom:2rem;">
+      <div class="section-title">Tuition &amp; <span>Programs</span></div>
+      <div class="section-sub">Transparent, accessible pricing. Financial assistance available &mdash; no family turned away.</div>
+    </div>
+    <div class="tuition-cards">
+      <div class="tuition-card featured">
+        <div class="featured-badge">Hebrew School</div>
+        <div class="tuition-tier">Kindergarten &ndash; 8th Grade</div>
+        <div class="tuition-price">$1,250<span>/year</span></div>
+        <div class="tuition-desc">A full year of meaningful Jewish education &mdash; Hebrew reading, holidays, Torah, and Jewish values.</div>
+        <ul class="tuition-features">
+          <li>Weekly Sunday sessions, 10 AM &ndash; 12 PM</li>
+          <li>Hebrew reading via Aleph Champ</li>
+          <li>Jewish holidays and traditions</li>
+          <li>Torah and Jewish values curriculum</li>
+          <li>Community events and celebrations</li>
+        </ul>
+        <button class="tuition-btn" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Enroll Now</button>
+      </div>
+      <div class="tuition-card">
+        <div class="tuition-tier">Sibling Discount</div>
+        <div class="tuition-price" style="font-size:1.5rem;color:var(--teal-dark);">Ask Us</div>
+        <div class="tuition-desc">Enrolling more than one child? We offer a sibling discount to make JUDA Dallas accessible for your whole family.</div>
+        <ul class="tuition-features">
+          <li>Discount applied for 2nd child and beyond</li>
+          <li>All children receive full programming</li>
+          <li>Contact us for exact discount details</li>
+          <li>Financial assistance also available</li>
+        </ul>
+        <button class="tuition-btn" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Multiple Children</button>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:0.5rem;">Need financial assistance? <a href="mailto:manya@chabadofdallas.com" style="color:var(--coral);text-decoration:underline;">Contact us</a> &mdash; no family turned away.</p>
+  </div>
+</section>
+
+<section id="bnei" style="background:var(--white)">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="margin-bottom:2rem;">
+      <div class="section-title">Bar &amp; Bat Mitzvah <span>Classes</span></div>
+      <div class="section-sub">One-on-one and small group instruction with experienced teachers. Reach out directly to get started.</div>
+    </div>
+    <div class="bnei-cards">
+      <div class="bnei-card">
+        <div class="bnei-type">Bar Mitzvah</div>
+        <div class="bnei-name">Rabbi Mendy Zajac</div>
+        <div class="bnei-title">Bar Mitzvah Instructor</div>
+        <div class="bnei-detail">Personalized Bar Mitzvah preparation rooted in tradition, meaning, and confidence. Rabbi Mendy guides each student at his own pace.</div>
+        <button class="tuition-btn" style="margin-top:1rem;" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Sign Up in Registration</button>
+      </div>
+      <div class="bnei-card">
+        <div class="bnei-type">Bat Mitzvah</div>
+        <div class="bnei-name">Manya Zajac</div>
+        <div class="bnei-title">Bat Mitzvah Instructor</div>
+        <div class="bnei-detail">Warm, meaningful Bat Mitzvah preparation that connects each girl to her heritage and empowers her for this milestone moment.</div>
+        <button class="tuition-btn" style="margin-top:1rem;" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Sign Up in Registration</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="testimonials" style="background:var(--off-white)">
+  <div style="text-align:center;max-width:860px;margin:0 auto 2rem;">
+    <div class="section-title">What <span>Families</span> Say</div>
+    <div class="section-sub" style="margin:0 auto;">Families who have made JUDA Dallas part of their Jewish journey.</div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="testimonial-text">"The teachers at JUDA are something truly special. My child talks about them all week — and every Sunday morning, she's up before I am, already asking if it's time to go. The warmth and care they bring to every child is something I didn't expect. We are so proud."</div>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:var(--teal);">SP</div>
+        <div><div class="author-name">S.P.</div><div class="author-child">JUDA Dallas Parent</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="testimonial-text">"Every Sunday my son counts down the days until the next one. He comes home proud — proud of what he learned, proud of his Hebrew, proud to be Jewish. Watching that pride grow in him has been one of the greatest gifts. The teachers make every child feel seen and celebrated."</div>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:var(--coral);">OM</div>
+        <div><div class="author-name">O.M.</div><div class="author-child">JUDA Dallas Parent</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="testimonial-text">"I never imagined my daughter would ask to go to Hebrew school — but here we are. She finishes each class glowing, already asking when the next Sunday is. The teachers are warm, passionate, and genuinely love what they do. As a parent, the pride I feel is indescribable."</div>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:var(--teal-dark);">JT</div>
+        <div><div class="author-name">J.T.</div><div class="author-child">JUDA Dallas Parent</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="registration-section" id="register">
+  <div class="reg-wrap">
+    <div class="section-title">Register for <span>JUDA Dallas</span></div>
+    <div class="section-sub">Tiferet Israel &middot; 10909 Hillcrest Rd, Dallas, TX 75230 &middot; Classes begin August 23rd</div>
+    <div class="reg-form">
+      <div id="success-msg" class="success-msg">
+        <h3>Registration Received!</h3>
+        <p>Thank you for registering. We'll be in touch within 2 business days. Shalom!</p>
+      </div>
+      <div id="form-fields">
+        <div class="form-section-label">Parent / Guardian Information</div>
+        <div class="form-row">
+          <div class="form-group"><label>First Name <span class="required">*</span></label><input type="text" id="p-first" placeholder="First Name"/></div>
+          <div class="form-group"><label>Last Name <span class="required">*</span></label><input type="text" id="p-last" placeholder="Last Name"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Area Code <span class="required">*</span></label><input type="text" id="p-areacode" placeholder="e.g. 214" maxlength="3"/></div>
+          <div class="form-group"><label>Phone Number <span class="required">*</span></label><input type="tel" id="p-phone" placeholder="e.g. 929-7968"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group full"><label>E-mail <span class="required">*</span></label><input type="email" id="p-email" placeholder="myname@example.com"/></div>
+        </div>
+        <div class="form-section-label">Address <span class="required">*</span></div>
+        <div class="form-row"><div class="form-group full"><label>Street Address</label><input type="text" id="addr1" placeholder="Street Address"/></div></div>
+        <div class="form-row"><div class="form-group full"><label>Street Address Line 2</label><input type="text" id="addr2" placeholder="Apt, Suite, Unit, etc."/></div></div>
+        <div class="form-row">
+          <div class="form-group"><label>City</label><input type="text" id="city" placeholder="City"/></div>
+          <div class="form-group"><label>State / Province</label><input type="text" id="state" placeholder="State / Province"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Postal / Zip Code</label><input type="text" id="zip" placeholder="Zip Code"/></div>
+          <div class="form-group"><label>Country</label>
+            <select id="country"><option value="">Please Select</option><option>United States</option><option>Canada</option><option>Israel</option><option>Other</option></select>
+          </div>
+        </div>
+        <div class="form-section-label">Amount of Children</div>
+        <div class="form-row">
+          <div class="form-group"><label>Number of Children Enrolling</label>
+            <select id="num-children" onchange="updateChildren()"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
+          </div>
+        </div>
+        <div class="sibling-note">A sibling discount is available for families enrolling 2 or more children. We will apply this at the time of enrollment.</div>
+        <div class="form-section-label">Child's Information</div>
+        <div class="form-row">
+          <div class="form-group"><label>First Name <span class="required">*</span></label><input type="text" id="c1-first" placeholder="First Name"/></div>
+          <div class="form-group"><label>Last Name <span class="required">*</span></label><input type="text" id="c1-last" placeholder="Last Name"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Grade Entering <span class="required">*</span></label>
+            <select id="c1-grade"><option value="">Select grade...</option><option>Kindergarten</option><option>1st Grade</option><option>2nd Grade</option><option>3rd Grade</option><option>4th Grade</option><option>5th Grade</option><option>6th Grade</option><option>7th Grade</option><option>8th Grade</option></select>
+          </div>
+        </div>
+        <div id="child2-section" style="display:none;">
+          <div class="form-section-label">Second Child's Name</div>
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" id="c2-first" placeholder="First Name"/></div>
+            <div class="form-group"><label>Last Name</label><input type="text" id="c2-last" placeholder="Last Name"/></div>
+          </div>
+          <div class="form-row"><div class="form-group"><label>Grade Entering</label>
+            <select id="c2-grade"><option value="">Select grade...</option><option>Kindergarten</option><option>1st Grade</option><option>2nd Grade</option><option>3rd Grade</option><option>4th Grade</option><option>5th Grade</option><option>6th Grade</option><option>7th Grade</option><option>8th Grade</option></select>
+          </div></div>
+        </div>
+        <div id="child3-section" style="display:none;">
+          <div class="form-section-label">Third Child's Name</div>
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" id="c3-first" placeholder="First Name"/></div>
+            <div class="form-group"><label>Last Name</label><input type="text" id="c3-last" placeholder="Last Name"/></div>
+          </div>
+          <div class="form-row"><div class="form-group"><label>Grade Entering</label>
+            <select id="c3-grade"><option value="">Select grade...</option><option>Kindergarten</option><option>1st Grade</option><option>2nd Grade</option><option>3rd Grade</option><option>4th Grade</option><option>5th Grade</option><option>6th Grade</option><option>7th Grade</option><option>8th Grade</option></select>
+          </div></div>
+        </div>
+        <div class="form-section-label">Bar &amp; Bat Mitzvah Classes</div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Is your child interested in Bar or Bat Mitzvah lessons?</label>
+          <div class="radio-group" style="flex-wrap:wrap;gap:1rem;">
+            <label><input type="radio" name="bnei-mitzvah" value="Bar Mitzvah lessons with Rabbi Mendy Zajac"/> Bar Mitzvah lessons</label>
+            <label><input type="radio" name="bnei-mitzvah" value="Bat Mitzvah lessons with Manya Zajac"/> Bat Mitzvah lessons</label>
+            <label><input type="radio" name="bnei-mitzvah" value="No"/> Not at this time</label>
+          </div>
+        </div>
+        <div class="form-section-label">Background Information</div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Has your child had Jewish education before?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="prev-edu" value="yes"/> Yes</label>
+            <label><input type="radio" name="prev-edu" value="no"/> No</label>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Is the biological mother of the child Jewish? <span class="required">*</span></label>
+          <div class="radio-group">
+            <label><input type="radio" name="mother-jewish" value="yes"/> Yes</label>
+            <label><input type="radio" name="mother-jewish" value="no"/> No</label>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Were there any conversions or adoptions in the family? <span class="required">*</span> <span class="label-hint">(parents, grandparents on either side)</span></label>
+          <textarea id="conversions" placeholder="Please describe if applicable, or write 'None'"></textarea>
+        </div>
+        <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">Submit Registration</button>
+        <p class="form-note">We'll be in touch within 2 business days. No payment collected today.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>JUDA Dallas &mdash; Judaism Through the Arts</strong><br/>
+  A Project of Chabad of Dallas &amp; Tiferet Israel<br/>
+  Tiferet Israel &middot; 10909 Hillcrest Rd, Dallas, TX 75230<br/>
+  Phone: <a href="tel:2149297968">(214) 929-7968</a> &middot; Email: <a href="mailto:manya@chabadofdallas.com">manya@chabadofdallas.com</a> &middot; <a href="donate.html" style="text-decoration:underline;">Donate</a><br/>
+  <span style="margin-top:4px;display:block;font-size:12px;color:rgba(255,255,255,0.4);">&copy; 2026 JUDA Dallas. All rights reserved.</span>
+</footer>
+
+<script>
+function updateChildren() {
+  const n = parseInt(document.getElementById('num-children').value);
+  document.getElementById('child2-section').style.display = n >= 2 ? 'block' : 'none';
+  document.getElementById('child3-section').style.display = n >= 3 ? 'block' : 'none';
+}
+
+async function handleSubmit() {
+  const first = document.getElementById('p-first').value.trim();
+  const last = document.getElementById('p-last').value.trim();
+  const email = document.getElementById('p-email').value.trim();
+  const c1first = document.getElementById('c1-first').value.trim();
+  const c1grade = document.getElementById('c1-grade').value;
+  const motherJewish = document.querySelector('input[name="mother-jewish"]:checked');
+  const conversions = document.getElementById('conversions').value.trim();
+
+  if (!first || !last || !email || !c1first || !c1grade || !motherJewish || !conversions) {
+    alert('Please fill in all required fields before submitting.');
+    return;
+  }
+
+  const numChildren = parseInt(document.getElementById('num-children').value);
+  const prevEdu = document.querySelector('input[name="prev-edu"]:checked');
+
+  const data = {
+    'Parent First Name': first,
+    'Parent Last Name': last,
+    'Phone': document.getElementById('p-areacode').value.trim() + ' ' + document.getElementById('p-phone').value.trim(),
+    'Email': email,
+    'Street Address': document.getElementById('addr1').value.trim(),
+    'Address Line 2': document.getElementById('addr2').value.trim(),
+    'City': document.getElementById('city').value.trim(),
+    'State': document.getElementById('state').value.trim(),
+    'Zip Code': document.getElementById('zip').value.trim(),
+    'Country': document.getElementById('country').value,
+    'Number of Children': numChildren,
+    'Child 1 First Name': c1first,
+    'Child 1 Last Name': document.getElementById('c1-last').value.trim(),
+    'Child 1 Grade': c1grade,
+    'Child 2 First Name': numChildren >= 2 ? document.getElementById('c2-first').value.trim() : '',
+    'Child 2 Last Name': numChildren >= 2 ? document.getElementById('c2-last').value.trim() : '',
+    'Child 2 Grade': numChildren >= 2 ? document.getElementById('c2-grade').value : '',
+    'Child 3 First Name': numChildren >= 3 ? document.getElementById('c3-first').value.trim() : '',
+    'Child 3 Last Name': numChildren >= 3 ? document.getElementById('c3-last').value.trim() : '',
+    'Child 3 Grade': numChildren >= 3 ? document.getElementById('c3-grade').value : '',
+    'Bar or Bat Mitzvah Lessons': (document.querySelector('input[name="bnei-mitzvah"]:checked') || {value: 'Not answered'}).value,
+    'Prior Jewish Education': prevEdu ? prevEdu.value : 'Not answered',
+    'Biological Mother Jewish': motherJewish.value,
+    'Conversions or Adoptions': conversions,
+    '_replyto': email,
+    '_subject': 'New JUDA Dallas Registration: ' + first + ' ' + last
+  };
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  try {
+    const response = await fetch('https://formspree.io/f/maqvaryw', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (response.ok) {
+    window.location.href = 'pricing.html';
+    } else {
+      alert('There was a problem submitting. Please try again or email manya@chabadofdallas.com directly.');
+      btn.disabled = false;
+      btn.textContent = 'Submit Registration';
+    }
+  } catch(e) {
+    alert('There was a network error. Please try again or email manya@chabadofdallas.com directly.');
+    btn.disabled = false;
+    btn.textContent = 'Submit Registration';
+  }
+}
+</script>
+<script>
+(function () {
+  var root = document.getElementById('gallery-slider');
+  if (!root) return;
+  var track = root.querySelector('.slider-track');
+  var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+  var dotsWrap = document.getElementById('gallery-dots');
+  var current = 0, timer = null;
+
+  slides.forEach(function (_, i) {
+    var b = document.createElement('button');
+    b.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+    b.addEventListener('click', function () { go(i); restart(); });
+    dotsWrap.appendChild(b);
+  });
+  var dots = dotsWrap.querySelectorAll('button');
+
+  function go(i) {
+    current = (i + slides.length) % slides.length;
+    var s = slides[current];
+    track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.clientWidth) / 2, behavior: 'smooth' });
+    mark();
+  }
+  function mark() {
+    for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('active', k === current);
+  }
+  function nearest() {
+    var mid = track.scrollLeft + track.clientWidth / 2, best = 0, bestD = Infinity;
+    slides.forEach(function (s, i) {
+      var d = Math.abs(s.offsetLeft + s.clientWidth / 2 - mid);
+      if (d < bestD) { bestD = d; best = i; }
+    });
+    return best;
+  }
+  var scrollT;
+  track.addEventListener('scroll', function () {
+    clearTimeout(scrollT);
+    scrollT = setTimeout(function () { current = nearest(); mark(); }, 80);
+  });
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(function () { go(current + 1); }, 4500);
+  }
+  root.querySelector('.prev').addEventListener('click', function () { go(current - 1); restart(); });
+  root.querySelector('.next').addEventListener('click', function () { go(current + 1); restart(); });
+  root.addEventListener('mouseenter', function () { clearInterval(timer); });
+  root.addEventListener('mouseleave', restart);
+  track.addEventListener('touchstart', function () { clearInterval(timer); }, { passive: true });
+  track.addEventListener('touchend', function () { restart(); }, { passive: true });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { go(current + 1); restart(); }
+    if (e.key === 'ArrowLeft') { go(current - 1); restart(); }
+  });
+  mark();
+  restart();
+})();
+</script>
+</body>
+</html>
