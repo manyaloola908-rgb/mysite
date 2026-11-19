@@ -1,0 +1,8 @@
+# V'AHAVTA page — friendly addresses (200 = show the page, keep the address)
+/vahavta      /donate.html  200
+/Vahavta      /donate.html  200
+/VAHAVTA      /donate.html  200
+/v'ahavta     /donate.html  200
+/V'AHAVTA     /donate.html  200
+/v%27ahavta   /donate.html  200
+/V%27AHAVTA   /donate.html  200
